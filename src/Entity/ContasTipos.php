@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContasTiposRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContasTiposRepository::class)]
 class ContasTipos
@@ -14,6 +15,8 @@ class ContasTipos
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'É necessário informar o tipo.')]
+    #[Assert\Length(min:1, max:255, minMessage: 'É necessário informar até 255 caracteres.')]
     private ?string $tipo = null;
 
     public function getId(): ?int

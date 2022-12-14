@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ContasRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: ContasRepository::class)]
 class Contas
 {
