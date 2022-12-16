@@ -19,7 +19,7 @@ class Contas
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $saldo = null;
+    private ?float $saldo = 0;
 
     #[ORM\ManyToOne(inversedBy: 'contas')]
     #[ORM\JoinColumn(nullable: false)]
