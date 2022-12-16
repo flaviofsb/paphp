@@ -23,8 +23,20 @@ class Transacoes
     private ?string $tipo = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: 'É necessário informar o tipo.')]
+    #[Assert\NotBlank(message: 'É necessário informar o valor.')]
+    #[Assert\Currency(message: 'É necessário informar um valor monetário.')]
     private ?float $valor = null;
+
+    #[ORM\ManyToOne(inversedBy: 'transacoes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Contas $conta_origem = null;
+
+    #[ORM\ManyToOne(inversedBy: 'transacoes_recebidas')]
+    private ?Contas $conta_destino = null;
+
+    #[ORM\ManyToOne(inversedBy: 'transacoes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -63,6 +75,42 @@ class Transacoes
     public function setValor(float $valor): self
     {
         $this->valor = $valor;
+
+        return $this;
+    }
+
+    public function getContaOrigem(): ?Contas
+    {
+        return $this->conta_origem;
+    }
+
+    public function setContaOrigem(?Contas $conta_origem): self
+    {
+        $this->conta_origem = $conta_origem;
+
+        return $this;
+    }
+
+    public function getContaDestino(): ?Contas
+    {
+        return $this->conta_destino;
+    }
+
+    public function setContaDestino(?Contas $conta_destino): self
+    {
+        $this->conta_destino = $conta_destino;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
