@@ -11,7 +11,15 @@ class CorrentistasController extends AbstractController
     #[Route('/correntistas', name: 'app_correntistas')]
     public function index(): Response
     {
-        return $this->render('correntistas/index.html.twig', [
+        return $this->render('correntistas/correntistas.html.twig', [
+            'controller_name' => 'CorrentistasController',
+        ]);
+    }
+
+    #[Route('/correntistas/cadastrar', name: 'app_correntistas_cadastrar')]
+    public function exibirCadastrar(): Response
+    {
+        return $this->render('correntistas/cadastrar/index.html.twig', [
             'controller_name' => 'CorrentistasController',
         ]);
     }
