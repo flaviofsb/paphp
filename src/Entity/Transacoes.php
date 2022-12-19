@@ -10,6 +10,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: TransacoesRepository::class)]
 class Transacoes
 {
+    public const EDIT = 'POST_EDIT';
+    public const VIEW = 'POST_VIEW';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -28,14 +31,14 @@ class Transacoes
     private ?float $valor = null;
 
     #[ORM\ManyToOne(inversedBy: 'transacoes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Contas $conta_origem = null;
 
     #[ORM\ManyToOne(inversedBy: 'transacoes_recebidas')]
     private ?Contas $conta_destino = null;
 
     #[ORM\ManyToOne(inversedBy: 'transacoes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
     public function getId(): ?int

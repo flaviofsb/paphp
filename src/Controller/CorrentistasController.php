@@ -24,3 +24,12 @@ class CorrentistasController extends AbstractController
         ]);
     }
 }
+
+/**
+ * ADICIONAR TRANSACAO
+ * EDITAR TRANSACAO
+ * LISTAR TRANSACAO
+ * 
+ * LISTAR CONTAS
+ * 
+ */

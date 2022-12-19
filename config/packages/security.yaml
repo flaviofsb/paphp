@@ -37,7 +37,7 @@ security:
          - { path: ^/correntista, roles: ROLE_CORRENTISTA }
          
     role_hierarchy:
-        ROLE_ADMIN: [ROLE_EDITOR]
+        ROLE_ADMIN: [ROLE_GERENTE]
         ROLE_GERENTE: [ROLE_CORRENTISTA]
         ROLE_CORRENTISTA: [ROLE_USER]
 when@test:
