@@ -1,0 +1,204 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Banco Residente{% endblock %}
+
+{% block body %}
+<section class="bg-gray-900 text-white">
+  <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mx-auto bg-gray-800 mt-10">
+    <div class="block">
+      <h2 class="text-3xl font-bold sm:text-4xl">Bem vindo ao Banco Residente</h2>
+
+      <p class="mt-4 text-gray-300">
+        Um banco com produtos exclusivos para você Residente.
+      </p>
+      <br />
+
+      {% include 'menu.html.twig' %}
+      
+    </div>
+
+
+    <nav aria-label="Breadcrumb" class='mt-8'>
+      <ol role="list" class="flex items-center gap-1 text-sm text-white-600">
+        <li>
+          <a href="{{ path('app_index') }}" class="block transition hover:text-yellow-400">
+                       <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </li>
+        
+        <li>
+          <a href="{{ path('app_gerencia_agencia_editar') }}" class="block transition hover:text-yellow-400"> Minha agência </a>
+        </li>
+
+        
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </li>
+
+        <li>
+          <span class="block transition text-yellow-400"> Editar </span>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="mt-8">
+
+
+
+<div>
+           {{ form_start(form, {'attr':{'novalidate': 'novalidate'} } ) }}
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                {{ form_label(form.nome, 'Nome', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(form.nome, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(form.nome) }}
+            </div>
+             <div>
+                {{ form_label(form.numero, 'Número agência', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(form.numero, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(form.numero) }}
+            </div>
+           
+            <div>
+                {{ form_label(form.telefone, 'Telefone', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(form.telefone, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(form.telefone) }}
+            </div>
+            
+          </div>
+        
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div>
+                  {{ form_label(form.cep, 'CEP', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.cep, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.cep) }}
+              </div>
+              <div>
+                  {{ form_label(form.uf, 'Estado', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.uf, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.uf) }}
+              </div>
+              <div>
+                  {{ form_label(form.cidade, 'Cidade', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.cidade, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.cidade) }}
+              </div>
+              <div>
+                  {{ form_label(form.bairro, 'Bairro', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.bairro, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.bairro) }}
+              </div>
+              
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              <div>
+                  {{ form_label(form.logradouro, 'Endereço', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.logradouro, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.logradouro) }}
+              </div>
+              <div>
+                  {{ form_label(form.numero_endereco, 'Número', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.numero_endereco, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.numero_endereco) }}
+              </div>
+              <div>
+                  {{ form_label(form.complemento, 'Complemento', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                  {{ form_widget(form.complemento, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                  {{ form_errors(form.complemento) }}
+              </div>
+              
+          </div>
+
+        <div>
+            <button
+              class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500 mt-8"
+              type="submit"
+            >
+              <span
+                class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+              >
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </span>
+
+              <span class="text-sm font-medium transition-all group-hover:mr-4">
+                Editar
+              </span>
+            </button>
+        </div>
+    {{ form_end(form) }}
+      
+    </div>
+  </div>
+</section>
+<script>function showTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.remove("hidden");
+      break;
+    
+  }
+}
+function hideTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.add("hidden");
+      break;
+  
+  }
+}
+</script>          
+{% endblock %}

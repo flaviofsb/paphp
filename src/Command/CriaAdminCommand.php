@@ -46,6 +46,7 @@ class CriaAdminCommand extends Command
             $this->hasher->hashPassword($admin, $password)
             );
         $admin->setNome($nome);
+        $admin->setRoles(['ROLE_ADMIN']);
         $admin->setDataHoraCriacao(new \DateTime());
         $this->users->save($admin, true);
 

@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Banco Residente{% endblock %}
+
+{% block body %}
+<section class="bg-gray-900 text-white">
+  <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mx-auto bg-gray-800 mt-10">
+    <div class="block">
+      <h2 class="text-3xl font-bold sm:text-4xl">Bem vindo ao Banco Residente</h2>
+
+      <p class="mt-4 text-gray-300">
+        Um banco com produtos exclusivos para você Residente.
+      </p>
+      <br />
+
+      {% include 'menu.html.twig' %}
+      
+    </div>
+
+    
+    <div class="mt-8">
+
+<h3  class="text-2xl font-bold">Depositar</h3>
+
+<div>
+           {{ form_start(form, {'attr':{'novalidate': 'novalidate'} } ) }}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div>
+                {{ form_label(form.conta_destino, 'Informe a conta para depósito:', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(form.conta_destino, {'attr': {'class': 'numero block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(form.conta_destino) }}
+            </div>
+     
+            <div>
+                {{ form_label(form.valor, 'Valor:', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(form.valor, {'attr': {'class': 'valor block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(form.valor) }}
+            </div>
+          </div>
+        
+        <div>
+            <button
+              class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500 mt-8"
+              type="submit"
+            >
+              <span
+                class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+              >
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </span>
+
+              <span class="text-sm font-medium transition-all group-hover:mr-4">
+                Depositar
+              </span>
+            </button>
+        </div>
+    {{ form_end(form) }}
+      
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.3/jquery.inputmask.bundle.min.js" integrity="sha512-KKq2De1s9A47geFpVhtJexDbFm20AA7Zz7KkJ+6tWqXuvXeQHu1zr9N4VnsS1MBFJJbbE4n8FrdYad0hTK84mg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+$(function() {
+    $(".numero").inputmask("99999999999");
+    $('.valor').maskMoney({prefix:'', allowNegative: false, thousands:'', decimal:',', affixesStay: false});
+  })
+function showTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.remove("hidden");
+      break;
+    
+  }
+}
+function hideTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.add("hidden");
+      break;
+  
+  }
+}
+</script>          
+{% endblock %}

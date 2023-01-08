@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -55,10 +57,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $data_hora_cancelamento = null;
 
+    #[ORM\OneToMany(mappedBy: 'correntista', targetEntity: Contas::class)]
+    private Collection $contas;
+
     public function __construct()
     {
         $this->transacoes = new ArrayCollection();
         $this->contas_aprovadas = new ArrayCollection();
+        $this->contas = new ArrayCollection();
     }
 
 
@@ -251,6 +257,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDataHoraCancelamento(?\DateTimeInterface $data_hora_cancelamento): self
     {
         $this->data_hora_cancelamento = $data_hora_cancelamento;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contas>
+     */
+    public function getContas(): Collection
+    {
+        return $this->contas;
+    }
+
+    public function addConta(Contas $conta): self
+    {
+        if (!$this->contas->contains($conta)) {
+            $this->contas->add($conta);
+            $conta->setCorrentista($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConta(Contas $conta): self
+    {
+        if ($this->contas->removeElement($conta)) {
+            // set the owning side to null (unless already changed)
+            if ($conta->getCorrentista() === $this) {
+                $conta->setCorrentista(null);
+            }
+        }
 
         return $this;
     }

@@ -4,8 +4,8 @@
 
 {% block body %}
 <section class="bg-gray-900 text-white">
-  <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 ">
-    <div class="max-w-xl">
+  <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mx-auto bg-gray-800 mt-10">
+    <div class="block">
       <h2 class="text-3xl font-bold sm:text-4xl">Bem vindo ao Banco Residente</h2>
 
       <p class="mt-4 text-gray-300">
@@ -13,214 +13,53 @@
       </p>
       <br />
 
-      {{ dump(app.user) }}
-      {% if app.user %}
+      {% include 'menu.html.twig' %}
       
-<a
-  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
-  href="{{ path('app_index') }}"
->
-  <span
-    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
-  >
-    <svg
-      class="h-5 w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-  </span>
-
-  <span class="text-sm font-medium transition-all group-hover:mr-4">
-    Seus dados
-  </span>
-</a>
-<a
-  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
-  href="{{ path('app_logout') }}"
->
-  <span
-    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
-  >
-    <svg
-      class="h-5 w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-  </span>
-
-  <span class="text-sm font-medium transition-all group-hover:mr-4">
-    Logout
-  </span>
-</a>
-      {% else %}
-<a
-  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
-  href="{{ path('app_correntistas_cadastrar') }}"
->
-  <span
-    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
-  >
-    <svg
-      class="h-5 w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-  </span>
-
-  <span class="text-sm font-medium transition-all group-hover:mr-4">
-    Abra sua conta
-  </span>
-</a>
-<a
-  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
-  href="{{ path('app_login') }}"
->
-  <span
-    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
-  >
-    <svg
-      class="h-5 w-5"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-  </span>
-
-  <span class="text-sm font-medium transition-all group-hover:mr-4">
-    Acesse sua conta
-  </span>
-</a>
-
-{% endif %}
     </div>
 
+    {% for notice in app.flashes('notice') %}
+        <div id='mensagem' class='p-5 border-1-solid bg-green-300 rounded mt-8 text-gray-900'>{{ notice }}</div>
+    {% endfor %} 
+    {% if app.user %}
+      {% if "ROLE_ADMIN" in app.user.getRoles() %}
+
+           
+      <script>
+      document.addEventListener("click", fechaMensagem);
+
+      function fechaMensagem(){
+        x = document.getElementById("mensagem");
+        x.style.display = "none";
+      }
+      </script>
+      {% endif %}
+    {% else %}
     <div
       class="mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3"
     >
+      {% if agencias|length > 0 %}
+      {% for agencia in agencias %}
       <div class="flex items-start">
         <span class="flex-shrink-0 rounded-lg bg-gray-800 p-4">
           <span class="mdi mdi-bank"></span>
         </span>
 
         <div class="ml-4">
-          <h2 class="text-lg font-bold">Agência 1</h2>
+          <h2 class="text-lg font-bold">{{ agencia.nome }} - {{ agencia.numero }}</h2>
 
           <p class="mt-1 text-sm text-gray-300">
-            como número, nome, endereço, telefone, e gerente responsável
+            Endereço: {{ agencia.logradouro }}, {{ agencia.numeroEndereco }}, {{ agencia.complemento }}, {{ agencia.cidade }}, {{ agencia.bairro }} - {{ agencia.uf }}
+            <br/>
+            Telefone: {{ agencia.telefone }}
+            <br/>
+            Gerente: {{ agencia.gerente.nome }}
           </p>
         </div>
       </div>
-
-      <div class="flex items-start">
-        <span class="flex-shrink-0 rounded-lg bg-gray-800 p-4">
-          <span class="mdi mdi-bank"></span>
-        </span>
-
-
-        <div class="ml-4">
-          <h2 class="text-lg font-bold">Agência 2</h2>
-
-          <p class="mt-1 text-sm text-gray-300">
-            como número, nome, endereço, telefone, e gerente responsável
-          </p>
-        </div>
-      </div>
-
-      <div class="flex items-start">
-        <span class="flex-shrink-0 rounded-lg bg-gray-800 p-4">
-          <span class="mdi mdi-bank"></span>
-        </span>
-
-
-        <div class="ml-4">
-          <h2 class="text-lg font-bold">Agência 3</h2>
-
-          <p class="mt-1 text-sm text-gray-300">
-            como número, nome, endereço, telefone, e gerente responsável
-          </p>
-        </div>
-      </div>
-
-      <div class="flex items-start">
-        <span class="flex-shrink-0 rounded-lg bg-gray-800 p-4">
-          <span class="mdi mdi-bank"></span>
-        </span>
-
-
-        <div class="ml-4">
-          <h2 class="text-lg font-bold">Agência 4</h2>
-
-          <p class="mt-1 text-sm text-gray-300">
-            como número, nome, endereço, telefone, e gerente responsável
-          </p>
-        </div>
-      </div>
-
-      <div class="flex items-start">
-        <span class="flex-shrink-0 rounded-lg bg-gray-800 p-4">
-          <span class="mdi mdi-bank"></span>
-        </span>
-
-
-        <div class="ml-4">
-          <h2 class="text-lg font-bold">Agência 5</h2>
-
-          <p class="mt-1 text-sm text-gray-300">
-            como número, nome, endereço, telefone, e gerente responsável
-          </p>
-        </div>
-      </div>
-
-      <div class="flex items-start">
-        <span class="flex-shrink-0 rounded-lg bg-gray-800 p-4">
-          <span class="mdi mdi-bank"></span>
-        </span>
-
-
-        <div class="ml-4">
-          <h2 class="text-lg font-bold">Agência 6</h2>
-
-          <p class="mt-1 text-sm text-gray-300">
-            como número, nome, endereço, telefone, e gerente responsável
-          </p>
-        </div>
-      </div>
+      {% endfor %}
+      {% endif %}
     </div>
+    {% endif %}
   </div>
 </section>
 {% endblock %}

@@ -1,6 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
-    form_themes: ['templates/form/campos.html.twig']
+    form_themes: ['form/campos.html.twig']
 
 
 when@test:

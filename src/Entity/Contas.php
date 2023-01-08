@@ -38,19 +38,28 @@ class Contas
     #[ORM\ManyToOne(inversedBy: 'contas_aprovadas')]
     private ?User $gerente_aprovacao = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Assert\NotBlank(message: 'É necessário informar a data de criação.')]
-    #[Assert\DateTime(message: 'É necessário informar uma data e hora válida.')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]    
     private ?\DateTimeInterface $data_hora_criacao = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Assert\DateTime(message: 'É necessário informar uma data e hora válida.')]
     private ?\DateTimeInterface $data_hora_cancelamento = null;
 
+    #[ORM\ManyToOne(inversedBy: 'contas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $correntista = null;
+
+    #[ORM\ManyToOne(inversedBy: 'contas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Agencias $agencia = null;
+
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $status = 0;
+
+ 
     public function __construct()
     {
-        $this->transacoes = new ArrayCollection();
-        $this->transacoes_recebidas = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -82,65 +91,6 @@ class Contas
         return $this;
     }
 
-    /**
-     * @return Collection<int, Transacoes>
-     */
-    public function getTransacoes(): Collection
-    {
-        return $this->transacoes;
-    }
-
-    public function addTransaco(Transacoes $transaco): self
-    {
-        if (!$this->transacoes->contains($transaco)) {
-            $this->transacoes->add($transaco);
-            $transaco->setContaOrigem($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTransaco(Transacoes $transaco): self
-    {
-        if ($this->transacoes->removeElement($transaco)) {
-            // set the owning side to null (unless already changed)
-            if ($transaco->getContaOrigem() === $this) {
-                $transaco->setContaOrigem(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Transacoes>
-     */
-    public function getTransacoesRecebidas(): Collection
-    {
-        return $this->transacoes_recebidas;
-    }
-
-    public function addTransacoesRecebida(Transacoes $transacoesRecebida): self
-    {
-        if (!$this->transacoes_recebidas->contains($transacoesRecebida)) {
-            $this->transacoes_recebidas->add($transacoesRecebida);
-            $transacoesRecebida->setContaDestino($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTransacoesRecebida(Transacoes $transacoesRecebida): self
-    {
-        if ($this->transacoes_recebidas->removeElement($transacoesRecebida)) {
-            // set the owning side to null (unless already changed)
-            if ($transacoesRecebida->getContaDestino() === $this) {
-                $transacoesRecebida->setContaDestino(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getDataHoraAprovacao(): ?\DateTimeInterface
     {
@@ -189,4 +139,41 @@ class Contas
 
         return $this;
     }
+
+    public function getCorrentista(): ?User
+    {
+        return $this->correntista;
+    }
+
+    public function setCorrentista(?User $correntista): self
+    {
+        $this->correntista = $correntista;
+
+        return $this;
+    }
+
+    public function getAgencia(): ?Agencias
+    {
+        return $this->agencia;
+    }
+
+    public function setAgencia(?Agencias $agencia): self
+    {
+        $this->agencia = $agencia;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
 }

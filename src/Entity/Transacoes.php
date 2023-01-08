@@ -27,19 +27,18 @@ class Transacoes
 
     #[ORM\Column]
     #[Assert\NotBlank(message: 'É necessário informar o valor.')]
-    #[Assert\Currency(message: 'É necessário informar um valor monetário.')]
     private ?float $valor = null;
 
-    #[ORM\ManyToOne(inversedBy: 'transacoes')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Contas $conta_origem = null;
-
-    #[ORM\ManyToOne(inversedBy: 'transacoes_recebidas')]
-    private ?Contas $conta_destino = null;
 
     #[ORM\ManyToOne(inversedBy: 'transacoes')]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $conta_origem = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $conta_destino = null;
 
     public function getId(): ?int
     {
@@ -82,30 +81,6 @@ class Transacoes
         return $this;
     }
 
-    public function getContaOrigem(): ?Contas
-    {
-        return $this->conta_origem;
-    }
-
-    public function setContaOrigem(?Contas $conta_origem): self
-    {
-        $this->conta_origem = $conta_origem;
-
-        return $this;
-    }
-
-    public function getContaDestino(): ?Contas
-    {
-        return $this->conta_destino;
-    }
-
-    public function setContaDestino(?Contas $conta_destino): self
-    {
-        $this->conta_destino = $conta_destino;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -114,6 +89,30 @@ class Transacoes
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getContaOrigem(): ?string
+    {
+        return $this->conta_origem;
+    }
+
+    public function setContaOrigem(?string $conta_origem): self
+    {
+        $this->conta_origem = $conta_origem;
+
+        return $this;
+    }
+
+    public function getContaDestino(): ?string
+    {
+        return $this->conta_destino;
+    }
+
+    public function setContaDestino(?string $conta_destino): self
+    {
+        $this->conta_destino = $conta_destino;
 
         return $this;
     }

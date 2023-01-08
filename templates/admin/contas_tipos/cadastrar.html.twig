@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Banco Residente{% endblock %}
+
+{% block body %}
+<section class="bg-gray-900 text-white">
+  <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mx-auto bg-gray-800 mt-10">
+    <div class="block">
+      <h2 class="text-3xl font-bold sm:text-4xl">Bem vindo ao Banco Residente</h2>
+
+      <p class="mt-4 text-gray-300">
+        Um banco com produtos exclusivos para você Residente.
+      </p>
+      <br />
+
+      {% include 'menu.html.twig' %}
+      
+    </div>
+
+    <div class='block'>
+      <a
+        class="mt-10 block rounded-full border border-indigo-600 p-3 bg-indigo-600 text-white hover:bg-indigo-900 hover:text-white focus:outline-none focus:ring active:bg-indigo-500 flex items-center gap-1"
+        href="{{path('app_admin_cadastrar_tipos')}}"
+       style='height:50px; width:50px'
+       title='Cadastrar novo tipo de contas'
+       aria-label="tooltip 1" 
+      onmouseover="showTooltip(1)" onfocus="showTooltip(1)" onmouseout="hideTooltip(1)"
+       >
+        <span class="mdi mdi-bank-plus mx-auto"> </span>
+
+      
+      
+      </a>
+      
+                          <div id="tooltip1" role="tooltip" class="z-20 mt-1 w-64 absolute transition duration-150 ease-in-out shadow-lg bg-white p-4 rounded hidden" style='margin-left:70px; margin-top:-50px'>
+                                  <svg class="absolute left-0 -ml-2 bottom-0 top-0 h-full" width="9px" height="16px" viewBox="0 0 9 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                          <g id="Tooltips-" transform="translate(-874.000000, -1029.000000)" fill="#FFFFFF">
+                                              <g id="Group-3-Copy-16" transform="translate(850.000000, 975.000000)">
+                                                  <g id="Group-2" transform="translate(24.000000, 0.000000)">
+                                                      <polygon id="Triangle" transform="translate(4.500000, 62.000000) rotate(-90.000000) translate(-4.500000, -62.000000) " points="4.5 57.5 12.5 66.5 -3.5 66.5"></polygon>
+                                                  </g>
+                                              </g>
+                                          </g>
+                                      </g>
+                                  </svg>
+                                  <p class="text-sm font-bold text-gray-800 pb-1">Cadastrar novo tipo de conta</p>
+                                  
+                              </div>
+    </div>
+
+    <nav aria-label="Breadcrumb" class='mt-8'>
+      <ol role="list" class="flex items-center gap-1 text-sm text-white-600">
+        <li>
+          <a href="{{ path('app_index') }}" class="block transition hover:text-yellow-400">
+                       <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </li>
+        
+        <li>
+          <a href="{{ path('app_admin_tipos_listar') }}" class="block transition hover:text-yellow-400"> Tipos de contas </a>
+        </li>
+
+        
+        <li>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </li>
+
+        <li>
+          <span class="block transition text-yellow-400"> Cadastrar </span>
+        </li>
+      </ol>
+    </nav>
+
+
+    <div class="mt-8">
+
+
+
+<div>
+           {{ form_start(form, {'attr':{'novalidate': 'novalidate'} } ) }}
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+                {{ form_label(form.tipo, 'Tipo', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(form.tipo, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(form.tipo) }}
+            </div>
+             
+              
+          </div>
+
+        <div>
+            <button
+              class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500 mt-8"
+              type="submit"
+            >
+              <span
+                class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+              >
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </span>
+
+              <span class="text-sm font-medium transition-all group-hover:mr-4">
+                Cadastrar
+              </span>
+            </button>
+        </div>
+    {{ form_end(form) }}
+      
+    </div>
+  </div>
+</section>
+<script>function showTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.remove("hidden");
+      break;
+    
+  }
+}
+function hideTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.add("hidden");
+      break;
+  
+  }
+}
+</script>          
+{% endblock %}

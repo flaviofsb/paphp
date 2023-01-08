@@ -1,0 +1,455 @@
+
+{% if app.user %}
+
+      {% if "ROLE_ADMIN" in app.user.getRoles() %}
+      <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_admin_transacoes_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Transações
+            </span>
+          </a>
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_admin_contas_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Contas
+            </span>
+          </a>
+
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_admin_agencias_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Agencias
+            </span>
+          </a>
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_admin_gerentes_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Gerentes
+            </span>
+          </a>
+
+
+
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_admin_tipos_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Tipos de contas
+            </span>
+          </a>
+          
+          
+
+      {% else %}
+
+      {% if "ROLE_GERENTE" in app.user.getRoles() %}
+<a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_gerencia_transacoes_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Transações na agência
+            </span>
+          </a>
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_gerencia_contas_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Contas da agência
+            </span>
+          </a>
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_gerencia_agencia_editar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Minha agência
+            </span>
+          </a>     
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_gerencia_editar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Meus dados
+            </span>
+          </a>      
+
+      {% else %}
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_correntistas_transacoes_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Transações
+            </span>
+          </a>          
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_correntistas_contas_listar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Minhas Contas
+            </span>
+          </a>
+          <a
+            class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+            href="{{ path('app_correntistas_editar') }}"
+          >
+            <span
+              class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+            >
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+
+            <span class="text-sm font-medium transition-all group-hover:mr-4">
+              Meus dados
+            </span>
+          </a>          
+          
+      {% endif %}
+     
+      {% endif %}
+
+<a
+  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+  href="{{ path('app_logout') }}"
+>
+  <span
+    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+  >
+    <svg
+      class="h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+  </span>
+
+  <span class="text-sm font-medium transition-all group-hover:mr-4">
+    Logout
+  </span>
+</a>
+      {% else %}
+<a
+  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+  href="{{ path('app_cadastrar_correntistas') }}"
+>
+  <span
+    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+  >
+    <svg
+      class="h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+  </span>
+
+  <span class="text-sm font-medium transition-all group-hover:mr-4">
+    Faça seu cadastro
+  </span>
+</a>
+<a
+  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+  href="{{ path('app_login') }}"
+>
+  <span
+    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+  >
+    <svg
+      class="h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+  </span>
+
+  <span class="text-sm font-medium transition-all group-hover:mr-4">
+    Acesse seu cadastro
+  </span>
+</a>
+<a
+  class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-900 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+  href="{{ path('app_depositar_padrao') }}"
+>
+  <span
+    class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+  >
+    <svg
+      class="h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+  </span>
+
+  <span class="text-sm font-medium transition-all group-hover:mr-4">
+    Depositar
+  </span>
+</a>
+{% endif %}

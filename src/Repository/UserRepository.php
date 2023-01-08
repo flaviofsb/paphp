@@ -55,6 +55,68 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $this->save($user, true);
     }
+    public function findUsersByRole($role)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('u')
+            ->where('u.roles LIKE :roles')
+            ->setParameter('roles', '%"'.$role.'"%');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+    public function retornarGerentesSemAgencia($agencia = "")
+    {
+        
+        
+        $conn = $this->getEntityManager()->getConnection();
+        $role = "ROLE_GERENTE";
+        if($agencia){
+            $sql = "
+                SELECT user.id FROM user 
+                WHERE user.roles LIKE '%$role%'
+                    AND user.id NOT IN(SELECT gerente_id FROM agencias WHERE id <> $agencia )
+                ORDER BY user.nome ASC
+                ";
+                //echo $sql;
+
+        } else {
+            $sql = "
+                SELECT user.id FROM user 
+                WHERE user.roles LIKE '%$role%'
+                    AND user.id NOT IN(SELECT gerente_id FROM agencias)
+                ORDER BY user.nome ASC
+                ";
+                //echo $sql;
+        }
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+
+    public function findUsersByRoleAgencia($role, $agencia)
+    {
+        
+        
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "
+            SELECT u.* FROM user u, agencias a
+            WHERE a.gerente_id = u.id AND a.id = '$agencia'
+            AND u.roles LIKE '%$role%'
+            ORDER BY u.nome ASC
+            ";
+           // echo $sql;
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 
 //    /**
 //     * @return User[] Returns an array of User objects

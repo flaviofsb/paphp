@@ -7,10 +7,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 #[ORM\Entity(repositoryClass: AgenciasRepository::class)]
 class Agencias
 {
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+       /* $metadata->addPropertyConstraint('gerente', new Assert\Unique([
+            'fields' => ['gerente_id'],
+        ]));*/
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -22,14 +29,17 @@ class Agencias
     private ?string $nome = null;
 
     #[ORM\OneToOne(inversedBy: 'agencias_gerenciadas', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, unique: true)]
+    
     private ?User $gerente = null;
 
     #[ORM\OneToMany(mappedBy: 'agencia', targetEntity: User::class)]
-    private Collection $users;
+    #[Assert\Unique(message: 'Este gerente esta alocado em outra agência.')]
+    #[Assert\NotBlank(message: 'É necessário informar o gerente da agência.')]
 
+    private Collection $users;
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'É necessário informar o numero da agência.')]
+    #[Assert\NotBlank(message: 'É necessário informar o número da agência.')]
     #[Assert\Length(min:1, max:255, minMessage: 'É necessário informar até 255 caracteres.')]
     private ?string $numero = null;
 
@@ -67,9 +77,14 @@ class Agencias
     #[Assert\Length(min:1, max:255, minMessage: 'É necessário informar até 255 caracteres.')]
     private ?string $uf = null;
 
+    #[ORM\OneToMany(mappedBy: 'agencia', targetEntity: Contas::class)]
+    private Collection $contas;
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->contas = new ArrayCollection();
     }
 
 
@@ -241,6 +256,34 @@ class Agencias
         return $this;
     }
 
+    public function getContas(): ?Contas
+    {
+        return $this->contas;
+    }
+
+    public function addConta(Contas $conta): self
+    {
+        if (!$this->contas->contains($conta)) {
+            $this->contas->add($conta);
+            $conta->setAgencia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConta(Contas $conta): self
+    {
+        if ($this->contas->removeElement($conta)) {
+            // set the owning side to null (unless already changed)
+            if ($conta->getAgencia() === $this) {
+                $conta->setAgencia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
     
 
 }

@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Banco Residente{% endblock %}
+
+{% block body %}
+<section class="bg-gray-900 text-white">
+  <div class="max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mx-auto bg-gray-800 mt-10">
+    <div class="block">
+      <h2 class="text-3xl font-bold sm:text-4xl">Bem vindo ao Banco Residente</h2>
+
+      <p class="mt-4 text-gray-300">
+        Um banco com produtos exclusivos para você Residente.
+      </p>
+      <br />
+
+      {% include 'menu.html.twig' %}
+      
+    </div>
+
+
+    <div class="mt-8">
+
+
+
+
+      <h3 class="text-3xl font-bold sm:text-3xl">Cadastro de clientes</h3>
+
+<div>
+            {{ form_start(registrationForm, {'attr':{'novalidate': 'novalidate'} } ) }}
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                {{ form_label(registrationForm.nome, 'Nome', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(registrationForm.nome, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(registrationForm.nome) }}
+            </div>
+            <div>
+                {{ form_label(registrationForm.email, 'E-mail', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                {{ form_label(registrationForm.plainPassword.first, 'Senha', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(registrationForm.plainPassword.first) }}
+            </div>
+            <div>
+                {{ form_label(registrationForm.plainPassword.second, 'Confirme a senha', {'label_attr': {'class': 'block text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'block w-full shadow-sm border-gray-300 dark:border-transparent dark:text-gray-800 rounded-md border p-2 mt-1 mb-2'}})}}
+                {{ form_errors(registrationForm.plainPassword.second) }}
+            </div>
+        </div>
+
+        <div class="flex items-center mt-4 mb-4">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'h-4 w-4 rounded border-gray border text-indigo-300 mr-2'}}) }}
+            {{ form_label(registrationForm.agreeTerms, 'Aceito os termos', {'label_attr': {'class': 'text-sm text-gray-700 dark:text-gray-300 font-medium'}}) }}
+        </div>
+
+        <div>
+            <button
+              class="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500 mt-8"
+              type="submit"
+            >
+              <span
+                class="absolute right-0 translate-x-full transition-transform group-hover:-translate-x-4"
+              >
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </span>
+
+              <span class="text-sm font-medium transition-all group-hover:mr-4">
+                Cadastrar
+              </span>
+            </button>
+        </div>
+    {{ form_end(registrationForm) }}
+      
+    </div>
+  </div>
+</section>
+<script>function showTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.remove("hidden");
+      break;
+    
+  }
+}
+function hideTooltip(flag) {
+  switch (flag) {
+    case 1:
+      document.getElementById("tooltip1").classList.add("hidden");
+      break;
+  
+  }
+}
+</script>  
+{% endblock %}
